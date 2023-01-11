@@ -1,4 +1,12 @@
 
+# Description
+
+Débuter un projet de zéros n'est pas chose facile. L'initialisation d'un projet from scratch  passe souvent par , le choix type de de base données, le choix de l'architecture des fichiers, gestion d'authentification et autorisation, envoie des mails etc. Des taches que nous effectuons tous les jours en tant que développeur. Sur ce dépôt, je vous présente mon Quick starter node js, express, prisma. Des fonctionnalités, basic seront intégré, et reste plus qu'à vous de modifier comme vous le souhaitez !
+
+# Stack
+Nodejs, express, prisma ORM, nodemail
+
+
 ## API Reference authentification
 L'authentification est gerer avec les Json Web Token
 
