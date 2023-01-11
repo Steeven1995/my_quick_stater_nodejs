@@ -11,6 +11,7 @@ datasource db {
 }
 
 model User {
+
   id      Int      @id @default(autoincrement())
   createdAt  DateTime   @default(now())
   email   String   @unique
@@ -20,6 +21,44 @@ model User {
   isConfirm   Boolean @default(false)
   token String? 
   tokenExpiration DateTime?
+  company Company?
+
+}
+
+
+model Company {
+
+  id        Int      @id @default(autoincrement())
+  name      String
+  logo_public_id      String
+  logo_url      String
+  description      String
+  city      String
+  country      String
+  address      String
+  bp      String
+  clients   Client[]
+  owner     User @relation(fields: [ownerId], references: [id])
+  ownerId   Int @unique
+
+}
+
+model Client {
+
+  id        Int      @id @default(autoincrement())
+  name      String
+  invoices  Invoice[]
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId Int
+}
+
+
+model Invoice {
+  id        Int      @id @default(autoincrement())
+  amount    Int
+  statut    String
+  client    Client   @relation(fields: [clientId], references: [id])
+  clientId  Int
 }
 
 
