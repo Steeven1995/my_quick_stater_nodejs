@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
 // generate access tokent
 function generateAccessToken(user){
