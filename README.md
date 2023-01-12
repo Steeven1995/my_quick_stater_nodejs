@@ -5,6 +5,7 @@ Débuter un projet de zéros n'est pas chose facile. L'initialisation d'un proje
 
 # Stack
 Nodejs, express, prisma ORM, nodemail
+Vous pouvez utiliser n'importe quelle base de données , il suivi de voir la document autour de Prisma ORM
 
 
 ## API Reference authentification
