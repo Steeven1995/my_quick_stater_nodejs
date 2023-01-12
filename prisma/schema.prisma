@@ -53,7 +53,7 @@ model Client {
   bp      String
   city      String
   country      String
-  email      String @unique
+  email      String
   phone      String
   invoices  Invoice[]
   company   Company  @relation(fields: [companyId], references: [id])
