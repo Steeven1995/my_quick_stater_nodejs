@@ -84,7 +84,7 @@ router.post('/signup', async(req, res, next)=>{
 
 
     sendEmail(email, "Email de confirmation",`<p>Merci d'avoir crée un compte chez nous veuillez confirmer votre en cliquant sur ce lien <a href='http://localhost:3000/api/auth/confirmation/${token}'>cliquez ici</a></p>`)
-    .then(response=> res.json({data : user, message:"Le compte a été crée avec succès veuillez vérifier vos email pour confirmer"}))
+    .then(response=> res.json({success : true, message:"Le compte a été crée avec succès veuillez vérifier vos email pour confirmer"}))
     .catch(error=> res.status(500).send({message : error.message}))
     
 

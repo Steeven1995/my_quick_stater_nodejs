@@ -12,7 +12,7 @@ datasource db {
 
 model User {
 
-  id      Int      @id @default(autoincrement())
+  id      String @id @default(uuid())
   createdAt  DateTime   @default(now())
   email   String   @unique
   password String
@@ -28,7 +28,7 @@ model User {
 
 model Company {
 
-  id        Int      @id @default(autoincrement())
+  id        String @id @default(uuid())
   name      String
   logo_public_id      String
   logo_url      String
@@ -41,13 +41,13 @@ model Company {
   email      String
   clients   Client[]
   owner     User @relation(fields: [ownerId], references: [id])
-  ownerId   Int @unique
+  ownerId   String @unique
 
 }
 
 model Client {
 
-  id        Int      @id @default(autoincrement())
+  id        String @id @default(uuid())
   name      String
   deliveryAddress String
   bp      String
@@ -57,17 +57,22 @@ model Client {
   phone      String
   invoices  Invoice[]
   company   Company  @relation(fields: [companyId], references: [id])
-  companyId Int
+  companyId String
 
 }
 
-
 model Invoice {
-  id        Int      @id @default(autoincrement())
-  amount    Int
-  statut    String
-  client    Client   @relation(fields: [clientId], references: [id])
-  clientId  Int
+
+  id          String @id @default(uuid())
+  title       String?
+  tva         Int?
+  amount      Int
+  date        DateTime
+  statut      String
+  products    String
+  client      Client   @relation(fields: [clientId], references: [id])
+  clientId    String
+  
 }
 
 
