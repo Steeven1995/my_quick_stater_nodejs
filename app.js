@@ -16,6 +16,7 @@ app.get('/', async (req, res, next) => {
 
 app.use('/api', require('./routes/api.route'));
 app.use('/api/company', require('./routes/api.company'));
+app.use('/api/client', require('./routes/api.client'));
 app.use('/api/auth', require('./routes/api.auth'));
 
 

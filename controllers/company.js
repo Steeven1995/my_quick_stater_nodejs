@@ -6,7 +6,7 @@ class CompanyController {
 
   async create(req, res, next) {
 
-    const { name, description, city, country, address, bp } = req.body
+    const { name, description, city, country, address, bp, phone, email } = req.body
     const logo = req.files.logo
     const userId = req.user.id
 
@@ -20,6 +20,8 @@ class CompanyController {
             data: {
                 name,
                 description,
+                phone, 
+                email,
                 logo_url :result.url, 
                 logo_public_id:result.public_id,
                 city,
@@ -34,7 +36,6 @@ class CompanyController {
         res.json(company)
 
     } catch (error) {
-        console.log("error");
         next(error);
     }
   }
@@ -64,7 +65,7 @@ class CompanyController {
 
     try{
 
-        const { name, description, city, country, address, bp } = req.body
+        const { name, description, city, country, address, bp, phone, email } = req.body
         
         if(req.files){
             const {logo} = req.files
@@ -82,7 +83,7 @@ class CompanyController {
 
         const company = await prisma.company.update({
             where: { ownerId : userId },
-            data: { name, description, city, country, address, bp },
+            data: { name, description, city, country, address, bp, phone, email },
           })
         res.json(company)
 

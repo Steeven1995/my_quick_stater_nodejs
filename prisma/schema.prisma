@@ -37,6 +37,8 @@ model Company {
   country      String
   address      String
   bp      String
+  phone      String
+  email      String
   clients   Client[]
   owner     User @relation(fields: [ownerId], references: [id])
   ownerId   Int @unique
@@ -47,9 +49,16 @@ model Client {
 
   id        Int      @id @default(autoincrement())
   name      String
+  deliveryAddress String
+  bp      String
+  city      String
+  country      String
+  email      String @unique
+  phone      String
   invoices  Invoice[]
   company   Company  @relation(fields: [companyId], references: [id])
   companyId Int
+
 }
 
 
