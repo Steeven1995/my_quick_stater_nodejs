@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const CompanyController = require('../controllers/company')
-const isAuthenticateWithToken = require('../utils/isAuthenticateWithToken')
+const isAuthenticateWithToken = require('../middleware/isAuthenticateWithToken')
 
 
 router.post('/', isAuthenticateWithToken, CompanyController.create)
