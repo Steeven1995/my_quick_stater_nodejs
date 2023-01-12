@@ -33,15 +33,16 @@ class ClientController {
     async update(req, res, next) {
 
         const { name, deliveryAddress, bp, city, country, phone, email } = req.body
+        const { clientId } = req.params
 
         try{
 
             const companyId  = await getCompany(req.user.id)
 
             const client = await prisma.client.update({
-                where: { companyId : companyId.id },
+                where: { id : Number(clientId) },
                 data: { name, deliveryAddress, bp, city, country, phone, email  },
-              })
+            })
 
             res.json(client)
 
@@ -87,15 +88,11 @@ class ClientController {
         
             const client = await prisma.client.findUnique({
                 where: {
-                    id: clientId,
-                    company: {
-                        id: companyId.id
-                    }
+                    id: Number(clientId)
                 }
             })
 
             res.json(client)
-
 
         }catch(error){
 
@@ -129,8 +126,6 @@ class ClientController {
 
         }
     }
-
-    
 
 }
 
