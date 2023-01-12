@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const generateAccessToken = require('../utils/generateAccessToken')
 const generateRefreshToken = require('../utils/generateResfresToken')
-const isAuthenticateWithToken = require('../utils/isAuthenticateWithToken')
+const isAuthenticateWithToken = require('../middleware/isAuthenticateWithToken')
 const generateTokenConfirmation = require('../utils/generateTokenConfirmation')
 const sendEmail = require('../utils/sendMail')
 
@@ -11,12 +11,13 @@ const sendEmail = require('../utils/sendMail')
 const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient()
 
-
+// Login Route
 router.post('/login', async (req, res, next) => {
 
   try{
 
     const {email, password} = req.body
+
     const user = await prisma.user.findUnique({
         where: {
           email: email,
@@ -244,7 +245,9 @@ router.post('/reset-password/:token', async(req, res, next)=>{
     })
 
   }catch(error){
+
     next(error)
+
   }
 
 })
