@@ -33,7 +33,9 @@ class CompanyController {
                 }
             }
         })
-        res.json(company)
+
+        res.json({success: true, data : company})
+
 
     } catch (error) {
         next(error);
@@ -51,7 +53,8 @@ class CompanyController {
             return
         }
 
-        res.json({data : company})
+        res.json({success:true, data : company})
+
 
     }catch(error){
         next(error)
@@ -77,15 +80,16 @@ class CompanyController {
                 data: { name, description, logo_url :result.url, 
                     logo_public_id:result.public_id, city, country, address, bp },
               })
-            res.json(company)
-            return
+              res.json({success:true, data : company})
+              return
         }
 
         const company = await prisma.company.update({
             where: { ownerId : userId },
             data: { name, description, city, country, address, bp, phone, email },
           })
-        res.json(company)
+        res.json({success:true, data : company})
+
 
     }catch(error){
         next(error)
@@ -98,7 +102,8 @@ class CompanyController {
     const userId = req.user.id
     try{
         const company = await prisma.company.delete({ where: { ownerId : userId } })
-        res.json(company)
+
+        res.json({success:true, message : "Entreprise supprimée"})
     }catch(error){
         next(error)
     }

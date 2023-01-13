@@ -21,7 +21,7 @@ class ClientController {
                 }
             })
 
-            res.json(client)
+            res.json({success: true, data : client})
 
         }catch(error){
 
@@ -32,18 +32,15 @@ class ClientController {
     }
 
     async update(req, res, next) {
-
         const { name, deliveryAddress, bp, city, country, phone, email } = req.body
-
         const { clientId } = req.params
-
         try{
             const client = await prisma.client.update({
                 where: { id : clientId },
                 data: { name, deliveryAddress, bp, city, country, phone, email  },
             })
 
-            res.json(client)
+            res.json({success: true, data : client})
 
         }catch(error){
 
@@ -66,8 +63,7 @@ class ClientController {
                 }
             })
 
-            res.json(clients)
-
+            res.json({success: true, data : clients})
 
         }catch(error){
 
@@ -80,25 +76,19 @@ class ClientController {
     async findOne(req, res, next) {
 
         const { clientId } = req.params
-
         try{
-        
             const client = await prisma.client.findUnique({
                 where: {
                     id: clientId
-                }
+                },
+                include: { invoices: true },
             })
-
-            res.json(client)
-
+            res.json({success: true, data : client})
         }catch(error){
-
             next(error)
-
         }
-
     }
-
+    
     async delete(req, res, next) {
 
         const { clientId } = req.params
@@ -115,7 +105,7 @@ class ClientController {
                 }
             })
 
-            res.json(client)
+            res.json({success: true, message : "Client supprimé"})
 
         }catch(error){
 
