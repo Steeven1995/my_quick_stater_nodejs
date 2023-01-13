@@ -40,6 +40,7 @@ model Company {
   phone      String
   email      String
   clients   Client[]
+  invoices  Invoice[]
   owner     User @relation(fields: [ownerId], references: [id])
   ownerId   String @unique
 
@@ -72,6 +73,8 @@ model Invoice {
   products    String
   client      Client   @relation(fields: [clientId], references: [id])
   clientId    String
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId String
   
 }
 

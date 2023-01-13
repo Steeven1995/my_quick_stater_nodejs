@@ -7,6 +7,6 @@ const isAuthenticateWithToken = require('../middleware/isAuthenticateWithToken')
 router.post('/', isAuthenticateWithToken, CompanyController.create)
 router.get('/my', isAuthenticateWithToken, CompanyController.findOne)
 router.post('/update', isAuthenticateWithToken, CompanyController.update)
-router.get('/delete', isAuthenticateWithToken, CompanyController.delete)
+router.delete('/delete', isAuthenticateWithToken, CompanyController.delete)
 
 module.exports = router;
