@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://localhost:3000/css/style.css">
+	<link href="http://localhost:3000/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="invoice">
+        <div class="invoice overflow-auto">
+            <div style="min-width: 600px;">
+                <header>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <img height="100" width="100" src="<%= company.logo_url %>" />
+                            </div>
+                            <div class="col company-details">
+                                <h6 class="name">
+                                    <%= company.name %>
+                                </h6>
+                                <div><%=company.bp%>  , <%=company.city%>, <%=company.country%> , <%=company.address%></div>
+                                <div><%=company.phone%></div>
+                                <div><%=company.email%></div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <main>
+                    <div class="row contacts">
+                        <div class="col invoice-to">
+                            <h6 class="text-gray-light">FACTURE ADDRESSE A:</h6>
+                            <h4 class="to"><%= client.name %></h4>
+                            <div class="address"><%= client.bp %> , <%= client.city %>, <%= client.country %> , <%=client.deliveryAddress.address%></div>
+                            <div class="email"><a href="mailto:<%=client.email%>"><%=client.email%></a></div>
+                            <div class="email"><a><%=client.phone%></a></div>
+                        </div>
+                        <div class="col invoice-details">
+                            <h6 class="invoice-id">FACTURE N° <%=id%></h6>
+                            <div class="date">Date de creation: <%=date%></div>
+                        </div>
+                    </div>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-left">Description</th>
+                                <th class="text-right">Quantité</th>
+                                <th class="text-right">Prix unitaire</th>
+                                <th class="text-right">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let i=0;i<products.length;i++){ %>
+                                <tr>
+                                    <td class="no"><%= i+1 %></td>
+                                    <td class="text-left">
+                                        <h3>
+                                            <%= products[i].designation %>
+                                        </h3>
+                                    </td>
+                                    <td class="unit"><%=products[i].prix_unitaire%></td>
+                                    <td class="qty"><%=products[i].quantity%></td>
+                                    <td class="total"><%= products[i].prix_unitaire*products[i].quantity  %></td>
+                                </tr>
+                            <% } %>
+                           
+                          
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">TOTAL HT</td>
+
+                                <td><%= totalPriceHt %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">TAX <%= tva %></td>
+                                <td><%= totalTva %></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">TOTAL</td>
+                                <td><%= totalPriceHt+totalTva %></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="thanks">Merci !</div>
+                    <div class="notices">
+                        <div>INSTRUCTION:</div>
+                        <div class="notice">Des frais financiers de 1,5 % seront appliqués sur les soldes impayés après 30 jours..</div>
+                    </div>
+                </main>
+                <footer>
+                    La facture a été créée sur un ordinateur et est valable sans la signature et le sceau.
+                </footer>
+            </div>
+            <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+            <div></div>
+        </div>
+    </div>
+
+</body>
+</html>
