@@ -25,8 +25,7 @@ router.post('/login', async (req, res, next) => {
     })
 
     if(!user){
-        res.status(401).send({message : "Cet utilisateur n'existe pas"})
-        return
+      return  res.status(401).send({message : "Cet utilisateur n'existe pas"})  
     }
 
     const valid = await bcrypt.compare(password, user.password);
@@ -47,7 +46,7 @@ router.post('/login', async (req, res, next) => {
     const accessToken = generateAccessToken(data)
     const refreshToken = generateRefreshToken(data);
 
-    res.json({accessToken,refreshToken })
+    res.status(200).json({accessToken,refreshToken })
 
   }catch(error){
 
@@ -62,14 +61,13 @@ router.post('/signup', async(req, res, next)=>{
     const {name, email, password} = req.body
     const userExist = await prisma.user.findUnique({
         where: {
-          email: email,
-        },
+          email: email
+        }
     })
     const hashedPassword = await bcrypt.hash(password, 10);
 
     if(userExist){
-      res.status(401).send({message : "Cet utilisateur existe déjà"})
-      return
+      return res.status(400).send({message : "Cet utilisateur existe déjà"})
     }
     const token = generateTokenConfirmation()
     const user = await prisma.user.create({
